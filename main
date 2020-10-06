@@ -1,0 +1,178 @@
+# to do, generate list of numbers & use pop to take one out, so all of the
+# units are used/asked
+
+
+import random as r
+
+si_units = [
+        {"symbol": "Y",
+         "name": "yotta",
+         "base": "10^24",
+         "decimal": "1,000,000,000,000,000,000,000,000",
+        "scale": "septillion",
+        },
+        {"symbol": "Z",
+         "name": "zetta",
+         "base": "10^21",
+         "decimal": "1,000,000,000,000,000,000,000",
+        "scale": "sextillion",
+        },
+        {"symbol": "E",
+         "name": "exa",
+         "base": "10^18",
+         "decimal": "1,000,000,000,000,000,000",
+        "scale": "quintillion",
+        },
+        {"symbol": "P",
+         "name": "peta",
+         "base": "10^15",
+         "decimal": "1,000,000,000,000,000",
+        "scale": "quadrillion",
+        },
+        {"symbol": "T",
+         "name": "tera",
+         "base": "10^12",
+         "decimal": "1,000,000,000,000",
+        "scale": "trillion", 
+        },         
+        {"symbol": "G",
+         "name": "giga",
+         "base": "10^9",
+         "decimal": "1,000,000,000",
+        "scale": "billion", 
+        },         
+        {"symbol": "M",
+         "name": "mega",
+         "base": "10^6",
+         "decimal": "1,000,000",
+         "scale": "million", 
+        },  
+        {"symbol": "k",
+         "name": "kilo",
+         "base": "10^3",
+         "decimal": "1,000",
+         "scale": "thousand", 
+        },  
+        {"symbol": "h",
+         "name": "hecto",
+         "base": "10^2",
+         "decimal": "100",
+         "scale": "hundred", 
+        },  
+        {"symbol": "da",
+         "name": "deca",
+         "base": "10^1",
+         "decimal": "10",
+         "scale": "ten", 
+        },
+        {"symbol": "d",
+         "name": "deci",
+         "base": "10^-1",
+         "decimal": "0.1",
+         "scale": "tenth", 
+        },  
+        {"symbol": "c",
+         "name": "centi",
+         "base": "10^-2",
+         "decimal": "0.01",
+         "scale": "hundredth", 
+        },  
+        {"symbol": "m",
+         "name": "milli",
+         "base": "10^-3",
+         "decimal": "0.001",
+         "scale": "thousandth", 
+        },  
+        {"symbol": "μ",
+         "name": "micro",
+         "base": "10^-6",
+         "decimal": "0.000,001",
+         "scale": "millionth", 
+        },  
+        {"symbol": "n",
+         "name": "nano",
+         "base": "10^-9",
+         "decimal": "0.000,000,001",
+         "scale": "billionth", 
+        },  
+        {"symbol": "p",
+         "name": "pico",
+         "base": "10^-12",
+         "decimal": "0.000,000,000,001",
+         "scale": "trillionth", 
+        },          
+        {"symbol": "f",
+         "name": "femto",
+         "base": "10^-15",
+         "decimal": "0.000,000,000,000,001",
+         "scale": "quadrillionth", 
+        },  
+        {"symbol": "a",
+         "name": "atto",
+         "base": "10^-18",
+         "decimal": "0.000,000,000,000,000,001",
+         "scale": "quintillionth", 
+        },  
+        {"symbol": "z",
+         "name": "zepto",
+         "base": "10^-21",
+         "decimal": "0.000,000,000,000,000,000,001",
+         "scale": "sextillionth", 
+        },
+        {"symbol": "y",
+         "name": "yocto",
+         "base": "10^-24",
+         "decimal": "0.000,000,000,000,000,000,000,001",
+         "scale": "septillionth", 
+        }
+        ]
+
+list_len = len(si_units)
+x = r.randint(0, list_len-1)
+active = True
+hint = 1
+
+
+while active:
+
+    question =  "---------------------------------------"
+    question += "\n(q to quit | h for hint | a for answer)"
+    question += "\n---------------------------------------"
+    question += f"\nWhat is the name of {si_units[x]['symbol']}?"    
+    question += "\n>>> "
+    
+    answer = si_units[x]['name']
+    response = input(question)
+    
+    answer_length = len(answer)
+    h = hint + 1
+    
+    if response == "q":
+        active = False
+    elif response.lower() == "h":
+        if hint < answer_length:
+            print("\n" + answer[0:h]) 
+            hint += 1
+        else:
+            print("No more hints available, the full answer has been given!")
+            hint = 1
+            print(answer)
+    elif response == "a":
+        print("\nThe answer is " + answer)
+        print("\r")
+        x = r.randint(0, list_len)
+    elif answer == response.lower():
+        print("\nCorrect!")
+        print("\r" + si_units[x]['base'])
+        print(f"{si_units[x]['decimal']}")
+        x = r.randint(0, list_len)
+       # more = input("Do you want another question? Y/N ")
+          
+       # if more == "Y" or more == "y":
+       #     x = r.randint(0, list_len)
+            
+       # else: 
+       #     active = False
+    else: 
+        print("\nIncorrect!")
+        
